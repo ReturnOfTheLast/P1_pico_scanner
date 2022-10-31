@@ -28,7 +28,7 @@ def scan(wlan: WLAN, filterlist: list=[], filtertype: str='', filtermode: int=0)
         bssid = hexlify(netw[1]).decode("uft-8")
         ssid = netw[0].decode("uft-8")
         rssi = netw[3]
-        extracted_data.append((bssid, ssid, rssi))
+        extracted_data.append([bssid, ssid, rssi])
     
     # Filter data
     # Check if filtertype is set and filterlist isn't empty

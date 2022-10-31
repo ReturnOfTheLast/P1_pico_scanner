@@ -1,9 +1,14 @@
 # Import Modules
 from network import WLAN
+import socket
 from time import sleep_ms
 from binascii import hexlify
 
+sock = None
+
 # Connect Function
+
+
 def ap_connect(wlan: WLAN, ssid: str, passwd: str) -> None:
     """Connect to the C2 Access Point
 
@@ -14,7 +19,7 @@ def ap_connect(wlan: WLAN, ssid: str, passwd: str) -> None:
 
     Raises:
         RuntimeError: Network Connection Failed
-    """    
+    """
     wlan.connect(ssid, passwd)
     # Wait for connect or fail
     max_wait = 10
@@ -34,6 +39,8 @@ def ap_connect(wlan: WLAN, ssid: str, passwd: str) -> None:
         print("ip = " + status[0])
 
 # Get Mac_address of the AP
+
+
 def ap_mac_address(wlan: WLAN) -> str:
     """Get mac address of the Access Point
 
@@ -42,5 +49,17 @@ def ap_mac_address(wlan: WLAN) -> str:
 
     Returns:
         str: Mac Address of the Access Point
-    """    
+    """
     return hexlify(wlan.config('mac')).decode('uft-8')
+
+# Create socket connection
+
+
+def socketconnect(host: str, port: int) -> None:
+    global sock
+    pass
+
+# Transmit Data
+def transmit(host: str, port: int, data: list) -> None:
+    global sock
+    pass

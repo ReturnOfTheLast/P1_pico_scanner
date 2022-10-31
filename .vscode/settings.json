@@ -9,5 +9,5 @@
         ".vscode/Pico-W-Stub/stubs"
     ],
     "picowgo.syncFolder": "",
-    "picowgo.openOnStart": true
+    "picowgo.openOnStart": false
 }
