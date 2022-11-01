@@ -1,6 +1,6 @@
 # Import Modules
 from scanner import scan
-from transmitter import ap_connect, ap_mac_address, socketconnect, transmit
+from transmitter import ap_connect, ap_mac_address, transmit
 
 import network
 from machine import Pin, Timer
