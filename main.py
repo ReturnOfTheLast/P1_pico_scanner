@@ -13,6 +13,10 @@ wlan.active(True)
 C2_SSID = "C2 AP"
 C2_PASSWD = "thisisaverygoodandverylongpassword"
 
+# COLLECTOR HOST AND PORT
+COLLECTOR_HOST = "10.10.0.50"
+COLLECTOR_PORT = 62222
+
 # Constants
 DELAY = 1000
 FILTERTYPE = 'b'
@@ -36,6 +40,7 @@ while True:
     print(ap_mac_address(wlan))
     
     # TODO: Transmit Data
+    transmit(COLLECTOR_HOST, COLLECTOR_PORT, data)
     
     # Sleep Delay
     sleep_ms(DELAY)

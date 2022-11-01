@@ -3,6 +3,7 @@ from network import WLAN
 import socket
 from time import sleep_ms
 from binascii import hexlify
+import json
 
 sock = None
 
@@ -53,8 +54,6 @@ def ap_mac_address(wlan: WLAN) -> str:
     return hexlify(wlan.config('mac')).decode('uft-8')
 
 # Create socket connection
-
-
 def socketconnect(host: str, port: int) -> None:
     global sock
     pass
@@ -62,4 +61,5 @@ def socketconnect(host: str, port: int) -> None:
 # Transmit Data
 def transmit(host: str, port: int, data: list) -> None:
     global sock
+    dumped_data = bytes(json.dumps(data), "utf-8")
     pass
