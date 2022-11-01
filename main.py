@@ -39,7 +39,7 @@ while True:
     print(data)
     print(ap_mac_address(wlan))
     
-    # TODO: Transmit Data
+    # Transmit Data
     transmit(COLLECTOR_HOST, COLLECTOR_PORT, data)
     
     # Sleep Delay
