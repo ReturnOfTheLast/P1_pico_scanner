@@ -1,3 +1,5 @@
+
+
 # Import Modules
 from network import WLAN
 import socket
@@ -63,3 +65,5 @@ def transmit(host: str, port: int, data: list) -> None:
     global sock
     dumped_data = bytes(json.dumps(data), "utf-8")
     pass
+
+
