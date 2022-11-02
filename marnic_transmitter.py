@@ -2,6 +2,7 @@ import network
 import socket
 from machine import Pin, Timer
 import time
+import scanner
 
 led = Pin("LED", Pin.OUT)
 
@@ -34,7 +35,7 @@ def wlan_connect(ssid, key):
 
 def wlan_scan():
     global read, wlan
-    wlan.active()
+    wlan.active(True)
     wlan.scan()
     read = wlan.scan()
 
@@ -71,15 +72,11 @@ def data_filter():
 
 
 
-def socket_send():
-    pico_socket = socket.socket()
-    pico_socket.connect((client_ssid, client_port))
+def socket_send(data, server_ssid, server_port):
+    pico_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    pico_socket.connect((server_ssid, server_port))
     print("\nconnected")
-    for i in range(len(data)):
-        sending = str(data[i])
-        print(sending)
-        #pico_socket.sendall(sending)
-        pico_socket.write(sending)
+    pico_socket.write(str(data))
     pico_socket.close()
     print("\nsent")
 
@@ -105,15 +102,11 @@ client_ssid = "10.10.0.226"
 client_port = 65432
 
 for i in range(4):
-    read = []
-    wlan_scan()
+    
+    data = scanner.scan(wlan, filtermode=1)
 
-    data = []
-    mellemled = []
-    print(len(read))
-    data_filter()
     toggle()
-    socket_send()
+    #socket_send(data)
     toggle()
     time.sleep(4)
     print(f"#{i+1}")
