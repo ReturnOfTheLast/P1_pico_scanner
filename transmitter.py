@@ -48,7 +48,7 @@ def ap_mac_address(wlan: WLAN) -> str:
     return hexlify(wlan.config('mac')).decode('uft-8')
 
 # Transmit Data
-def transmit(host: str, port: int, data: list) -> None:
+def transmit(host: str, port: int, data: dict) -> None:
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.connect((host, port))
     print("Socket Connected")

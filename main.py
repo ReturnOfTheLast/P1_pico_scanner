@@ -52,7 +52,14 @@ def blinker(times):
 while True:
     # Make Scan
     blinker(LED_BLINK_SCAN)
-    data = scan(wlan, filterlist=filterlist, filtertype=FILTERTYPE, filtermode=FILTERMODE)
+    scandata = scan(wlan, filterlist=filterlist, filtertype=FILTERTYPE, filtermode=FILTERMODE)
+    
+    # Setup Data Package
+    data = {
+        "scan": scandata,
+        "location": [0, 0, 0],
+        "time": 0
+    }
     print(data)
 
     # Transmit Data
