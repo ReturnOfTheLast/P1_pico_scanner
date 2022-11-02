@@ -3,7 +3,7 @@ from scanner import scan
 from transmitter import ap_connect, ap_mac_address, transmit
 
 import network
-from machine import Pin, Timer
+from machine import Pin
 from time import sleep_ms
 
 # Instantiate wlan object and bring the network interface up
