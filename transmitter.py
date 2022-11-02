@@ -1,5 +1,3 @@
-
-
 # Import Modules
 from network import WLAN
 import socket
@@ -7,11 +5,7 @@ from time import sleep_ms
 from binascii import hexlify
 import json
 
-sock = None
-
 # Connect Function
-
-
 def ap_connect(wlan: WLAN, ssid: str, passwd: str) -> None:
     """Connect to the C2 Access Point
 
@@ -42,8 +36,6 @@ def ap_connect(wlan: WLAN, ssid: str, passwd: str) -> None:
         print("ip = " + status[0])
 
 # Get Mac_address of the AP
-
-
 def ap_mac_address(wlan: WLAN) -> str:
     """Get mac address of the Access Point
 
@@ -55,15 +47,13 @@ def ap_mac_address(wlan: WLAN) -> str:
     """
     return hexlify(wlan.config('mac')).decode('uft-8')
 
-# Create socket connection
-def socketconnect(host: str, port: int) -> None:
-    global sock
-    pass
-
 # Transmit Data
-def transmit(host: str, port: int, data: list) -> None:
-    global sock
-    dumped_data = bytes(json.dumps(data), "utf-8")
-    pass
-
-
+def transmit(host: str, port: int, data: dict) -> None:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.connect((host, port))
+    print("Socket Connected")
+    datadump = bytes(json.dumps(data), "utf-8")
+    print(f"Sending {datadump}")
+    sock.write(datadump)
+    sock.close()
+    print("Sent")
