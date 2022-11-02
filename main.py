@@ -1,9 +1,9 @@
 # Import Modules
-import scanner
-from transmitter import ap_connect, ap_mac_address, socketconnect, transmit
-from marnic_transmitter import toggle, socket_send, 
+from scanner import scan
+from transmitter import ap_connect, ap_mac_address, transmit 
 import network
-import time
+from machine import Pin
+from time import sleep_ms
 
 # Instantiate wlan object and bring the network interface up
 wlan = network.WLAN(network.STA_IF)
@@ -40,7 +40,14 @@ filterlist.append(ap_mac_address(wlan))
 # Alternatively Filter by SSID
 #filterlist.append(C2_SSID)
 
-"""
+def blinker(times):
+    time = int(200/(times*2))
+    for i in times:
+        led.off()
+        sleep_ms(time)
+        led.on()
+        sleep_ms(time)
+
 while True:
     # Make Scan
     blinker(LED_BLINK_SCAN)
@@ -60,13 +67,3 @@ while True:
 
     # Sleep Delay
     sleep_ms(DELAY)
-"""
-filter_list = ['AAU-1x', 'eduroam', 'C2 AP']
-while True:
-    
-    data = scanner.scan(wlan,filterlist=filter_list, filtertype='b', filtermode=1)
-
-    toggle()
-    socket_send(data, COLLECTOR_HOST, COLLECTOR_PORT)
-    toggle()
-    time.sleep_ms(200)
