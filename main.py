@@ -1,6 +1,6 @@
 # Import Modules
 from scanner import scan
-from transmitter import ap_connect, ap_mac_address, transmit 
+from transmitter import ap_connect, transmit 
 import network
 from machine import Pin
 from time import sleep_ms, time as unix_time
@@ -18,6 +18,12 @@ C2_SSID = "C152 AP"
 C2_PASSWD = "thisisaverygoodandverylongpassword"
 
 # COLLECTOR HOST AND PORT
+# IDEA: Make the collector transmit its ip
+# and set it on the pico.
+# wlan.ifconfig(("192.168.4.100", "255.255.255.0", "192.168.4.1", "192.168.4.1"))
+# (after wifi connect) will set the pico's ip to 192.168.4.100 so we can transmit
+# to it at the start. By doing this we do not need to set a static ip on the
+# collector side
 COLLECTOR_HOST = "192.168.4.50"
 COLLECTOR_PORT = 62222
 
@@ -25,8 +31,8 @@ COLLECTOR_PORT = 62222
 LED_BLINK_SCAN = 1
 LED_BLINK_TRANSMIT = 2
 DELAY = 100
-FILTERTYPE = 'b'
-FILTERMODE = 1
+FILTERTYPE = 'b'    # '' = no filter, 'w' = whitelist, 'b' = blacklist
+FILTERMODE = 1      # 0 = bssid, 1 = ssid
 
 # Variables
 filterlist = []
@@ -35,9 +41,7 @@ filterlist = []
 ap_connect(wlan, C2_SSID, C2_PASSWD)
 led.on()
 
-# Add C2 AP Mac Address to Blacklist
-#filterlist.append(ap_mac_address(wlan))
-# Alternatively Filter by SSID
+# Filter C2 SSID from the scan list
 filterlist.append(C2_SSID)
 
 def blinker(times):
