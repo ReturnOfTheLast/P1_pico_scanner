@@ -3,7 +3,7 @@ from scanner import scan
 from transmitter import ap_connect, ap_mac_address, transmit 
 import network
 from machine import Pin
-from time import sleep_ms
+from time import sleep_ms, time as unix_time
 
 # Instantiate wlan object and bring the network interface up
 wlan = network.WLAN(network.STA_IF)
@@ -14,11 +14,11 @@ led = Pin("LED", Pin.OUT)
 led.off()
 
 # C2 AP
-C2_SSID = "C2 AP"
+C2_SSID = "C152 AP"
 C2_PASSWD = "thisisaverygoodandverylongpassword"
 
 # COLLECTOR HOST AND PORT
-COLLECTOR_HOST = "10.10.0.50"
+COLLECTOR_HOST = "192.168.4.50"
 COLLECTOR_PORT = 62222
 
 # Constants
@@ -42,7 +42,7 @@ filterlist.append(ap_mac_address(wlan))
 
 def blinker(times):
     time = int(200/(times*2))
-    for i in times:
+    for i in range(times):
         led.off()
         sleep_ms(time)
         led.on()
@@ -57,7 +57,7 @@ while True:
     data = {
         "scan": scandata,
         "location": [0, 0, 0],
-        "time": 0
+        "time": unix_time()
     }
     print(data)
 

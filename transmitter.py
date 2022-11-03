@@ -54,6 +54,6 @@ def transmit(host: str, port: int, data: dict) -> None:
     print("Socket Connected")
     datadump = bytes(json.dumps(data), "utf-8")
     print(f"Sending {datadump}")
-    sock.write(datadump)
+    sock.send(datadump)
     sock.close()
     print("Sent")
