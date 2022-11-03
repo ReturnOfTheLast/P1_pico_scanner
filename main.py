@@ -26,7 +26,7 @@ LED_BLINK_SCAN = 1
 LED_BLINK_TRANSMIT = 2
 DELAY = 100
 FILTERTYPE = 'b'
-FILTERMODE = 0
+FILTERMODE = 1
 
 # Variables
 filterlist = []
@@ -36,9 +36,9 @@ ap_connect(wlan, C2_SSID, C2_PASSWD)
 led.on()
 
 # Add C2 AP Mac Address to Blacklist
-filterlist.append(ap_mac_address(wlan))
+#filterlist.append(ap_mac_address(wlan))
 # Alternatively Filter by SSID
-#filterlist.append(C2_SSID)
+filterlist.append(C2_SSID)
 
 def blinker(times):
     time = int(200/(times*2))
