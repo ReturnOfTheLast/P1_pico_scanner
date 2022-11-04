@@ -61,9 +61,10 @@ neg_sock.listen()
 conn, addr = neg_sock.accept()
 
 collector_host = addr[0]
-conn.send(b"\x01")
 conn.close()
 neg_sock.close()
+
+print(collector_host)
 
 sleep_ms(1000)
 
