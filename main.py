@@ -56,13 +56,14 @@ def blinker(times):
 
 # Get collector ip
 neg_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-neg_sock.bind(NEGOTIATION_HOST, NEGOTIATION_PORT)
+neg_sock.bind((NEGOTIATION_HOST, NEGOTIATION_PORT))
 neg_sock.listen()
 conn, addr = neg_sock.accept()
 
 collector_host = addr[0]
 conn.send(b"\x01")
 conn.close()
+neg_sock.close()
 
 sleep_ms(1000)
 
