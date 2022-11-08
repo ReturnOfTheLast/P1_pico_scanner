@@ -24,36 +24,24 @@ def ap_connect(wlan: WLAN, ssid: str, passwd: str) -> None:
         if wlan.status() < 0 or wlan.status() >= 3:
             break
         max_wait -= 1
-        print('Waiting for Connection...')
+        #print('Waiting for Connection...')
         sleep_ms(1000)
 
     # Handle connection error
     if wlan.status() != 3:
         raise RuntimeError('Network Connection Failed')
     else:
-        print('Connected')
+        #print('Connected')
         status = wlan.ifconfig()
-        print("ip = " + status[0])
-
-# Get Mac_address of the AP
-def ap_mac_address(wlan: WLAN) -> str:
-    """Get mac address of the Access Point
-
-    Args:
-        wlan (WLAN): WLAN object for the wifi radio
-
-    Returns:
-        str: Mac Address of the Access Point
-    """
-    return hexlify(wlan.config('mac')).decode('uft-8')
+        #print("ip = " + status[0])
 
 # Transmit Data
 def transmit(host: str, port: int, data: dict) -> None:
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.connect((host, port))
-    print("Socket Connected")
+    #print("Socket Connected")
     datadump = bytes(json.dumps(data), "utf-8")
-    print(f"Sending {datadump}")
+    #print(f"Sending {datadump}")
     sock.send(datadump)
     sock.close()
-    print("Sent")
+    #print("Sent")

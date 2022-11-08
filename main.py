@@ -64,7 +64,7 @@ collector_host = addr[0]
 conn.close()
 neg_sock.close()
 
-print(collector_host)
+#print(collector_host)
 
 sleep_ms(1000)
 
@@ -79,7 +79,7 @@ while True:
         "location": [0, 0, 0],
         "time": unix_time()
     }
-    print(data)
+    #print(data)
 
     # Transmit Data
     blinker(LED_BLINK_TRANSMIT)
