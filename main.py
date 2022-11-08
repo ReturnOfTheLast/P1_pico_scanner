@@ -1,6 +1,7 @@
 # Import Modules
 from scanner import scan
 from transmitter import ap_connect, transmit 
+from gps import getGPS
 import network
 from machine import Pin
 from time import sleep_ms, time as unix_time
@@ -68,22 +69,28 @@ neg_sock.close()
 
 sleep_ms(1000)
 
+latitude = ""
+longitude = ""
+satellites = ""
+
 while True:
+    latitude, longitude, satellites = getGPS()
+
     # Make Scan
-    blinker(LED_BLINK_SCAN)
+    #blinker(LED_BLINK_SCAN)
     scandata = scan(wlan, filterlist=filterlist, filtertype=FILTERTYPE, filtermode=FILTERMODE)
     
     # Setup Data Package
     data = {
         "scan": scandata,
-        "location": [0, 0, 0],
+        "location": [latitude, longitude],
         "time": unix_time()
     }
     #print(data)
 
     # Transmit Data
-    blinker(LED_BLINK_TRANSMIT)
+    #blinker(LED_BLINK_TRANSMIT)
     transmit(collector_host, COLLECTOR_PORT, data)
 
     # Sleep Delay
-    sleep_ms(DELAY)
+    #sleep_ms(DELAY)
