@@ -35,7 +35,7 @@ FILTERTYPE = 'b'    # '' = no filter, 'w' = whitelist, 'b' = blacklist
 FILTERMODE = 1      # 0 = bssid, 1 = ssid
 
 # Variables
-filterlist = []
+filterlist = ['']
 
 # Set static IP Address
 wlan.ifconfig((NEGOTIATION_HOST, "255.255.255.0", "192.168.4.1", "0.0.0.0"))
@@ -83,7 +83,7 @@ while True:
     # Setup Data Package
     data = {
         "scan": scandata,
-        "location": [latitude, longitude],
+        "location": [longitude, latitude],
         "time": unix_time()
     }
     #print(data)
