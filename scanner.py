@@ -3,12 +3,12 @@ from network import WLAN
 from binascii import hexlify
 
 # Scan function
-def scan(wlan: WLAN, filterlist: list=[], filtertype: str='', filtermode: int=0) -> list:
+def scan(wlan: WLAN, filterlist: list[str]=[], filtertype: str='', filtermode: int=0) -> list[list[str, str, int]]:
     """Scan for networks
 
     Args:
         wlan (WLAN): WLAN object for the wifi radioS
-        filterlist (list, optional): List to filter by. Defaults to [].
+        filterlist (list[str], optional): List to filter by. Defaults to [].
         filtertype (str, optional): Type of filter, 'w' = whitelist, 'b' = blacklist, leave empty for no filters. Defaults to ''.
         filtermode (int, optional): Filter by bssid or ssid, 0 = bssid, 1 = ssid. Defaults to 0.
 
@@ -16,7 +16,7 @@ def scan(wlan: WLAN, filterlist: list=[], filtertype: str='', filtermode: int=0)
         ValueError: Invalid Values
 
     Returns:
-        list: List of Network Data, (bssid, ssid, rssi)
+        list[list[str, str, int]]: List of Network Data, (bssid, ssid, rssi)
     """    
     # Make a scan
     scandata = wlan.scan()

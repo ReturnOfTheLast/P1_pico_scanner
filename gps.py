@@ -5,11 +5,11 @@ gpsModule = UART(1, baudrate=9600, tx=Pin(4), rx=Pin(5))
 
 TIMEOUT = False
 
-def getGPS() -> tuple:
+def getGPS() -> tuple[str, str, str]:
     """Get the GPS location.
 
     Returns:
-        tuple: latitude, longitude, satellites
+        tuple[str, str, str]: latitude, longitude, satellites
     """
     while True:
         gpsModule.readline()
@@ -19,7 +19,7 @@ def getGPS() -> tuple:
 
         if parts[0] == "b'$GPGGA" and len(parts) == 15:
             if parts[2] and parts[3] and parts[4] and parts[5] and parts[6]:
-                latitude = convertToDegree(parts[2]) # TODO: make function
+                latitude = convertToDegree(parts[2])
                 if (parts[3] == "S"):
                     latitude = f"-{latitude}"
                 longitude = convertToDegree(parts[4])
