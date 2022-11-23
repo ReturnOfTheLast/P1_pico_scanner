@@ -83,7 +83,7 @@ while True:
     # Setup Data Package
     data = {
         "scan": scandata,
-        "location": [longitude, latitude],
+        "location": [latitude, longitude],
         "time": unix_time()
     }
     #print(data)
