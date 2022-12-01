@@ -2,7 +2,6 @@
 from network import WLAN
 from binascii import hexlify
 
-# Scan function
 def scan(wlan: WLAN, filterlist: list[str]=[], filtertype: str='', filtermode: int=0) -> list[list[str, str, int]]:
     """Scan for networks
 
