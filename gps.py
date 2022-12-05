@@ -4,6 +4,7 @@ from time import sleep_ms
 
 # Setup UART connection with GPS Module
 gpsModule = UART(1, baudrate=9600, tx=Pin(4), rx=Pin(5))
+gpsModule.write(b'\xb5b\x06\x08\x06\x00\xc8\x00\x01\x00\x01\x00\xdej')
 
 TIMEOUT = False
 
